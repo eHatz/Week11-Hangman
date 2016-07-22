@@ -1,27 +1,36 @@
 //contains all of the methods which will check the letters guessed versus the random word selected
+var picksWord = require('./game.js')['picks-word'];
 var userLetter = require('./letter.js')['letter-control'];
+var letterObj = new userLetter(picksWord());
+var wordObj = new Word();
 
 function Word (wrd) {
 	this.guessedLetters = [];
 	this.guessCount = 5;
+	this.currentWord = letterObj.word;
+	this.blankedWord = letterObj.blankWord;
 	//check users letter input and inserts it into guessed letters probably with .push()
 	//check if letter input is inside of the word, if letter is not decrement amount of guesses by 1
 	//check if word was found
 
-	this.takeLetters = function(userIn) { //checks user input, will likely take prompt values
-		for (var i = 0; i <userLetter.chosenWord; i++) {
-			if (userIn === this.wordArr[i]) {
-				//call letter.js here
-
-			} else
-				this.guessCount--; //if the letter was not in the word array
-				console.log('That letter is not in the word. You have ' + this.guessCount + ' guesses left.');
+	this.takeLetters = function(userInput) { //checks user input, will likely take prompt values
+		if (this.currentWord.indexOf(userInput) >= 0) { //if the letter the user typed exists in the word
+			console.log('you guessed right'); 
+			this.guessedLetters.push(userInput); // adds the letter guessed to the array
+			for (var i = 0; i < this.currentWord.length; i++) { // runs throug the current word
+				if (userInput === this.currentWord[i]) { // if the letter that was typed exists at that index in the word switch blank word to the letter
+					this.blankedWord[i] = userInput;
+				};
 			};
-		};
-		this.guessedLetters.push(userIn);
-	};
+			console.log(this.blankedWord);
 
-	this.
+		} else {
+			console.log('you guessed wrong')
+			this.guessCount--;
+		};
+	};
 };
 
-exports['word']= Word
+
+
+module.exports['wordControl']= Word;
