@@ -2,16 +2,14 @@
 var userLetter = require('./letter.js')['letter-control'];
 
 function Word (wrd) {
-	this.word = wrd;
-	this.wordArr = wrd.split('');
 	this.guessedLetters = [];
 	this.guessCount = 5;
 	//check users letter input and inserts it into guessed letters probably with .push()
 	//check if letter input is inside of the word, if letter is not decrement amount of guesses by 1
 	//check if word was found
 
-	this.takeLetters = function(userIn) { //checks user input, will likely take propt values
-		for (var i = 0; i < this.wordArr.length; i++) {
+	this.takeLetters = function(userIn) { //checks user input, will likely take prompt values
+		for (var i = 0; i <userLetter.chosenWord; i++) {
 			if (userIn === this.wordArr[i]) {
 				//call letter.js here
 

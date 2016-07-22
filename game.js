@@ -1,4 +1,3 @@
-//constructor file
 //randomly selects a word for the player
 
 function pickWord() {
