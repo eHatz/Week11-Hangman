@@ -1,39 +1,44 @@
-//contains all of the methods which will check the letters guessed versus the random word selected
 var picksWord = require('./game.js')['picks-word'];
 var userLetter = require('./letter.js')['letter-control'];
-var letterObj = new userLetter(picksWord());
+var letterObj = new userLetter(picksWord()); //makes an object which used the constructor function in letter and takes a randomly selected string as a parameter
 var wordObj = new Word();
 
 function Word (wrd) {
 	this.guessedLetters = [];
-	this.guessCount = 5;
-	this.currentWord = letterObj.word;
+	this.guessCount = 5; //initial amount of guesses the user has
+	this.currentWord = letterObj.word; //sets value to the value inside of the letter object... could not set it to picksWord because it
+										//would return another random word from the array
 	this.blankedWord = letterObj.blankWord;
-	//check users letter input and inserts it into guessed letters probably with .push()
-	//check if letter input is inside of the word, if letter is not decrement amount of guesses by 1
-	//check if word was found
 
-	this.takeLetters = function(userInput) { //checks user input, will likely take prompt values
-		if (this.currentWord.indexOf(userInput) >= 0) { //if the letter the user typed exists in the word
+	this.takeLetters = function(userInput) {
+		//checks if the letter the user typed is in the word...check both capital and lower case
+		if (this.currentWord.indexOf(userInput.toLowerCase()) >= 0 || this.currentWord.indexOf(userInput.toUpperCase()) >= 0) {
+			console.log(' ');
 			console.log('you guessed right');
 			console.log('_______________________________________________');
 			console.log(' ');
 			this.guessedLetters.push(userInput); // adds the letter guessed to the array
-			for (var i = 0; i < this.currentWord.length; i++) { // runs throug the current word
-				if (userInput === this.currentWord[i]) { // if the letter that was typed exists at that index in the word switch blank word to the letter
-					this.blankedWord[i] = userInput;
-				};
+
+			for (var i = 0; i < this.currentWord.length; i++) { // runs through the current word
+				letterObj.checkLetter(this.blankedWord, this.currentWord, userInput, i); //adds the parameters to the check letter function stored in letterObj
+
+				//the code below works as well but the instructions said 
+				//'controls whether or not the letter appears as a '_' or as itself on-screen' should be stored in letters.js
+
+				// if (userInput === this.currentWord[i]) {
+				// 	this.blankedWord[i] = userInput;
+				// };
 			};
+
 		} else {
+			console.log(' ');
 			console.log('you guessed wrong')
 			console.log('_______________________________________________');
 			console.log(' ');
-			this.guessCount--;
-			this.guessedLetters.push(userInput);
+			this.guessCount--;//decrements guess count
+			this.guessedLetters.push(userInput); // add the user guessed letter to the array
 		};
 	};
 };
 
-
-
-module.exports['wordControl']= Word;
+module.exports['wordControl'] = Word;

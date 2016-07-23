@@ -1,8 +1,6 @@
-//randomly selects a word for the player
-
 function pickWord() {
-	var chars = ['robb', 'catelyn', 'eddard', 'hodor', 'joffrey', 'robert', 'ygritte', 'renly', 'drogo', 'stannis', 'myrcella', 'viserys', 'oberyn', 'shaggydog'];
-	var randNum = Math.floor(Math.random() * chars.length);
+	var chars = ['Robb', 'Catelyn', 'Eddard', 'Hodor', 'Joffrey', 'Robert', 'Ygritte', 'Renly', 'Drogo', 'Stannis', 'Myrcella', 'Viserys', 'Oberyn', 'Shaggydog'];
+	var randNum = Math.floor(Math.random() * chars.length); //randomly select a string in the array
 	return chars[randNum];
 };
 
