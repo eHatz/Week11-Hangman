@@ -15,18 +15,21 @@ function Word (wrd) {
 
 	this.takeLetters = function(userInput) { //checks user input, will likely take prompt values
 		if (this.currentWord.indexOf(userInput) >= 0) { //if the letter the user typed exists in the word
-			console.log('you guessed right'); 
+			console.log('you guessed right');
+			console.log('_______________________________________________');
+			console.log(' ');
 			this.guessedLetters.push(userInput); // adds the letter guessed to the array
 			for (var i = 0; i < this.currentWord.length; i++) { // runs throug the current word
 				if (userInput === this.currentWord[i]) { // if the letter that was typed exists at that index in the word switch blank word to the letter
 					this.blankedWord[i] = userInput;
 				};
 			};
-			console.log(this.blankedWord);
-
 		} else {
 			console.log('you guessed wrong')
+			console.log('_______________________________________________');
+			console.log(' ');
 			this.guessCount--;
+			this.guessedLetters.push(userInput);
 		};
 	};
 };
